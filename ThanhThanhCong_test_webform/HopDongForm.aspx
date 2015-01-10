@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout.Master" AutoEventWireup="true" CodeBehind="HopDongForm.aspx.cs" Inherits="ThanhThanhCong_test_webform.HopDongForm" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -30,9 +31,30 @@
     
     if (check == 1)
     {%>
-    <center>
+        <center>
     <h2>Hợp đồng - <%=_action %></h2>
-    <form action="/HopDong.aspx?action=<%=action %>" method="post" name="FHopDong" id="FHopDong" enctype ="multipart/form-data" onsubmit ="return CheckForm()">
+   <form id="frm1" runat="server">
+       <%string action = "Them";
+         string _action = "Thêm";
+         int maHopDong = -1;
+         try
+         {
+             maHopDong = int.Parse(Request.QueryString["maHopDong"]);
+         }
+         catch
+         {
+         }
+         ThanhThanhCong_test_webform.TTC_HopDongThueDatEntities entity = new ThanhThanhCong_test_webform.TTC_HopDongThueDatEntities();
+         ThanhThanhCong_test_webform.HopDong hd = null;
+         if (maHopDong != null)
+         {
+             hd = entity.HopDong.Where(item => item.MaHopDong == maHopDong).FirstOrDefault();
+             if (hd != null)
+             {
+                 action = "Sua";
+                 _action = "Sửa";
+             }
+         } %>
     <table>
         <tr>
             <td>Mã hợp đồng: </td>
@@ -92,50 +114,39 @@
         </tr>
         <tr>
             <td colspan="7">
-                <asp:gridview ID="Gridview1" runat="server" ShowFooter="True" AutoGenerateColumns="False">
+                <asp:GridView ID="grd" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="MaHopDong_ChiTiet" GridLines="Vertical" OnRowDataBound="grd_RowDataBound">
+                    <AlternatingRowStyle BackColor="#DCDCDC" />
                     <Columns>
                         <asp:TemplateField HeaderText="Mã vùng">
                             <ItemTemplate>
-                                <asp:DropDownList ID="MaVung" runat="server">
-                                <%
-                                %>
-                                    <asp:ListItem Text="User" Value="User"></asp:ListItem>
-                                    <asp:ListItem Text="Admin" Value="Admin"></asp:ListItem>
-                                    <asp:ListItem Text="Super User" Value="Super User"></asp:ListItem>
+                                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="TenVung" DataValueField="MaVung" SelectedValue='<%# Bind("MaVung") %>'>
                                 </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TTC_HopDongThueDatConnectionString4 %>" SelectCommand="SELECT * FROM [Vung]"></asp:SqlDataSource>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Header 1">
-                            <ItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Header 2">
-                            <ItemTemplate>
-                                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Header 3">
-                            <ItemTemplate>
-                                    <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-                            </ItemTemplate>
-                            <FooterStyle HorizontalAlign="Right" />
-                            <FooterTemplate>
-                                <asp:Button ID="ButtonAdd" runat="server" Text="Add New Row" />
-                            </FooterTemplate>
-                        </asp:TemplateField>
+                        <asp:BoundField DataField="SoThua" HeaderText="Số thửa" SortExpression="SoThua" />
+                        <asp:BoundField DataField="DienTich" HeaderText="Diện tích (ha)" SortExpression="DienTich" />
+                        <asp:BoundField DataField="ViTriDat" HeaderText="Vị trí đất" SortExpression="ViTriDat" />
+                        <asp:BoundField DataField="LoaiDat" HeaderText="Loại đất (cao/thấp/...)" SortExpression="LoaiDat" />
+                        <asp:BoundField DataField="TinhTrangDat" HeaderText="Tình trạng đất" SortExpression="TinhTrangDat" />
                     </Columns>
-                </asp:gridview>
-
-
-
+                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                    <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
+                    <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                    <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                    <SortedDescendingHeaderStyle BackColor="#000065" />
+                </asp:GridView>
+                <asp:Button ID="btnAddRow" runat="server" OnClick="btnAddRow_Click" Text="Add Row" />
             </td>
         </tr>
         <tr>
             <td></td>
             <td><input type="submit" style="width:50px" <%if (action == "Sua"){%> value="Sửa"<%}else{%>value="Thêm" <%}%>/></td>
         </tr>
-    </form>
         <tr>
             <%  string link = "";
                 if (action == "Sua")
@@ -145,24 +156,25 @@
         </tr>
     </table>
     </center>
+    </form>
     <script>
-    function CheckForm() {
-        if (txtMaVung.value == "" || txtMaVung.value == null) {
-            alert("Chưa nhập mã vùng.");
-            txtMaVung.focus();
-            return false;
+        function CheckForm() {
+            if (txtMaVung.value == "" || txtMaVung.value == null) {
+                alert("Chưa nhập mã vùng.");
+                txtMaVung.focus();
+                return false;
+            }
+            if (txtTenVung.value == "" || txtTenVung.value == null) {
+                alert("Chưa nhập tên vùng.");
+                txtTenVung.focus();
+                return false;
+            }
         }
-        if (txtTenVung.value == "" || txtTenVung.value == null) {
-            alert("Chưa nhập tên vùng.");
-            txtTenVung.focus();
-            return false;
-        }
-    }
     </script>
     <%}
     else
     {%>
         Chưa có danh sách vùng.<br />
-        Bấm vào <a href="/Vung.aspx">đây</a> để chuyển đến trang Quản lý vùng.
+    Bấm vào <a href="/Vung.aspx">đây</a> để chuyển đến trang Quản lý vùng.
     <%}%>
 </asp:Content>

@@ -13,12 +13,30 @@ namespace ThanhThanhCong_test_webform {
     public partial class HopDongForm {
         
         /// <summary>
-        /// Gridview1 control.
+        /// frm1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView Gridview1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frm1;
+        
+        /// <summary>
+        /// grd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grd;
+        
+        /// <summary>
+        /// btnAddRow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddRow;
     }
 }

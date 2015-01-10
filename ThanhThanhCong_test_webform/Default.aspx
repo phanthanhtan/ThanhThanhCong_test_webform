@@ -3,8 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <center>
-    <a href="/HopDong/Them">Tạo mới hợp đồng</a><br />
-    <a href="/HopDong/Index">Danh sách hợp đồng</a><br />
+    <a href="/HopDongForm.aspx">Tạo mới hợp đồng</a><br />
+    <a href="/HopDong.aspx">Danh sách hợp đồng</a><br />
     <a href="/Vung.aspx">Quản lý vùng</a><br />
 </center>
 </asp:Content>
