@@ -9,6 +9,13 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+    <div align="center">
+        <a href="Default.aspx">Trang chủ </a> -
+        <a href="/HopDongForm.aspx"> Tạo mới hợp đồng</a> -
+        <a href="/HopDong.aspx"> Danh sách hợp đồng</a> -
+        <a href="/Vung.aspx"> Quản lý vùng</a>
+    </div>
+    <br /><br />
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
