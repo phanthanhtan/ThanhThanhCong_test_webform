@@ -42,7 +42,7 @@ namespace ThanhThanhCong_test_webform
         public int SoVu { get; set; }
         public string TuVu { get; set; }
         public double DonGiaThue { get; set; }
-        public double TongTien { get; set; }
+        public string TongTien { get; set; }
         public double UngTruoc { get; set; }
     
         public virtual ICollection<HopDong_ChiTiet> HopDong_ChiTiet { get; set; }

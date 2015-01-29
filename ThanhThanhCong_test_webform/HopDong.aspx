@@ -3,6 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <center>
+    <%  if (Session["user"] != null && Session["per"].ToString() == "1")
+        {
+    %>
     <h2>Danh sách hợp đồng thuê đất</h2>
     <a href="/HopDongForm.aspx">Tạo mới hợp đồng</a><br /><br />
     <table cellspacing="0" cellpadding="0" border="1" style="text-align:center">
@@ -45,5 +48,11 @@
                 <%}
             }%>
     </table>
+    <% }
+       else
+       {%>
+            Chức năng này chỉ dành cho Admin.<br />
+            Bấm vào <a href="/DangNhap.aspx">đây</a> để đăng nhập.
+       <%} %>
 </center>
 </asp:Content>

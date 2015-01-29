@@ -10,10 +10,28 @@
 </head>
 <body>
     <div align="center">
-        <a href="Default.aspx">Trang chủ </a> -
-        <a href="/HopDongForm.aspx"> Tạo mới hợp đồng</a> -
+        <a href="Default.aspx">Trang chủ </a>
+        <%  if(Session["user"] != null)
+            { %>
+         -
+        <a href="/HopDongForm.aspx"> Tạo mới hợp đồng</a>
+        <%  if(Session["per"].ToString() == "1")
+            { %>
+         -
         <a href="/HopDong.aspx"> Danh sách hợp đồng</a> -
         <a href="/Vung.aspx"> Quản lý vùng</a>
+        <%  }
+            } %>
+    </div>
+    <div align="center">
+        <%  if(Session["user"] == null)
+            { %>
+                <a href="/DangNhap.aspx"> Đăng nhập</a>
+        <%  }
+            else
+            { %>
+                Xin chào <%=Session["user"] %> - <a href="/DangNhap.aspx?action=out"> Đăng xuất</a>
+        <%  } %>
     </div>
     <br /><br />
     <div>

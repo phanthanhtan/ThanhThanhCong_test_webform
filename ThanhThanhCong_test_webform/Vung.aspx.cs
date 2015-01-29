@@ -13,58 +13,61 @@ namespace ThanhThanhCong_test_webform
         private TTC_HopDongThueDatEntities entity = new TTC_HopDongThueDatEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string action = Request.QueryString["action"];
-            if (action == "Them")
+            if (Session["user"] != null && Session["per"].ToString() == "1")
             {
-                string them = Them();
-                switch (them)
+                string action = Request.QueryString["action"];
+                if (action == "Them")
                 {
-                    case "ThemOk":
-                        Response.Write("<script>alert('Thêm thành công!');</script>)");
-                        break;
-                    case "ThemError":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình thêm (có thể do trùng mã vùng). Vui lòng thao tác lại!');</script>");
-                        break;                    
-                    default:
-                        break;
+                    string them = Them();
+                    switch (them)
+                    {
+                        case "ThemOk":
+                            Response.Write("<script>alert('Thêm thành công!');</script>)");
+                            break;
+                        case "ThemError":
+                            Response.Write("<script>alert('Có lỗi xảy ra trong quá trình thêm (có thể do trùng mã vùng). Vui lòng thao tác lại!');</script>");
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            if (action == "Sua")
-            {
-                string maVung = Request.QueryString["maVung"];
-                string sua = Sua(maVung);
-                switch (sua)
+                if (action == "Sua")
                 {
-                    case "SuaOk":
-                        Response.Write("<script>alert('Sửa thành công!');</script>)");
-                        break;
-                    case "SuaError":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình sửa. Vui lòng thao tác lại!');</script>");
-                        break;
-                    default:
-                        break;
+                    string maVung = Request.QueryString["maVung"];
+                    string sua = Sua(maVung);
+                    switch (sua)
+                    {
+                        case "SuaOk":
+                            Response.Write("<script>alert('Sửa thành công!');</script>)");
+                            break;
+                        case "SuaError":
+                            Response.Write("<script>alert('Có lỗi xảy ra trong quá trình sửa. Vui lòng thao tác lại!');</script>");
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            if(action == "Xoa")
-            {
-                string maVung = Request.QueryString["maVung"];
-                string xoa = Xoa(maVung);
-                switch (xoa)
+                if (action == "Xoa")
                 {
-                    case "Xoa_Exist":
-                        Response.Write("<script>alert('Mã vùng được sử dụng trong hợp đồng. Vui lòng kiểm tra lại!');</script>)");
-                        break;
-                    case "XoaOk":
-                        Response.Write("<script>alert('Xóa thành công!');</script>");
-                        break;
-                    case "XoaError":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình xóa. Vui lòng thao tác lại!');</script>");
-                        break;
-                    case "XoaNull":
-                        Response.Write("<script>alert('Mã vùng không có trong cơ sở dữ liệu. Vui lòng kiểm tra lại!');</script>");
-                        break;
-                    default:
-                        break;
+                    string maVung = Request.QueryString["maVung"];
+                    string xoa = Xoa(maVung);
+                    switch (xoa)
+                    {
+                        case "Xoa_Exist":
+                            Response.Write("<script>alert('Mã vùng được sử dụng trong hợp đồng. Vui lòng kiểm tra lại!');</script>)");
+                            break;
+                        case "XoaOk":
+                            Response.Write("<script>alert('Xóa thành công!');</script>");
+                            break;
+                        case "XoaError":
+                            Response.Write("<script>alert('Có lỗi xảy ra trong quá trình xóa. Vui lòng thao tác lại!');</script>");
+                            break;
+                        case "XoaNull":
+                            Response.Write("<script>alert('Mã vùng không có trong cơ sở dữ liệu. Vui lòng kiểm tra lại!');</script>");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

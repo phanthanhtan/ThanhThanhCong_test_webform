@@ -2,6 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%  if (Session["user"] != null && Session["per"].ToString() == "1")
+        {
+    %>
 <%  string action = "Them";
     string _action = "Thêm";
     string maVung = Request.QueryString["maVung"];
@@ -57,4 +60,12 @@
         }
     }
 </script>
+    <% }
+       else
+       {%>
+            <center>
+            Chức năng này chỉ dành cho Admin.<br />
+            Bấm vào <a href="/DangNhap.aspx">đây</a> để đăng nhập.
+            </center>
+       <%} %>
 </asp:Content>

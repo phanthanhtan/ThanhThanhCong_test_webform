@@ -9,6 +9,7 @@
           <EntitySet Name="HopDong" EntityType="TTC_HopDongThueDatModel.Store.HopDong" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="HopDong_ChiTiet" EntityType="TTC_HopDongThueDatModel.Store.HopDong_ChiTiet" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="TTC_HopDongThueDatModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="TTC_HopDongThueDatModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Vung" EntityType="TTC_HopDongThueDatModel.Store.Vung" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_HopDong_ChiTiet_HopDong" Association="TTC_HopDongThueDatModel.Store.FK_HopDong_ChiTiet_HopDong">
             <End Role="HopDong" EntitySet="HopDong" />
@@ -46,7 +47,7 @@
           <Property Name="SoVu" Type="int" Nullable="false" />
           <Property Name="TuVu" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DonGiaThue" Type="float" Nullable="false" />
-          <Property Name="TongTien" Type="float" Nullable="false" />
+          <Property Name="TongTien" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="UngTruoc" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="HopDong_ChiTiet">
@@ -57,7 +58,7 @@
           <Property Name="MaHopDong" Type="int" Nullable="false" />
           <Property Name="MaVung" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="SoThua" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="DienTich" Type="float" Nullable="false" />
+          <Property Name="DienTich" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ViTriDat" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="LoaiDat" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="TinhTrangDat" Type="nvarchar" Nullable="false" MaxLength="200" />
@@ -71,6 +72,14 @@
           <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Pass" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Permission" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Vung">
           <Key>
@@ -112,6 +121,7 @@
           <EntitySet Name="HopDong" EntityType="TTC_HopDongThueDatModel.HopDong" />
           <EntitySet Name="HopDong_ChiTiet" EntityType="TTC_HopDongThueDatModel.HopDong_ChiTiet" />
           <EntitySet Name="sysdiagrams" EntityType="TTC_HopDongThueDatModel.sysdiagrams" />
+          <EntitySet Name="User" EntityType="TTC_HopDongThueDatModel.User" />
           <EntitySet Name="Vung" EntityType="TTC_HopDongThueDatModel.Vung" />
           <AssociationSet Name="FK_HopDong_ChiTiet_HopDong" Association="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_HopDong">
             <End Role="HopDong" EntitySet="HopDong" />
@@ -149,7 +159,7 @@
           <Property Name="SoVu" Type="Int32" Nullable="false" />
           <Property Name="TuVu" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="DonGiaThue" Type="Double" Nullable="false" />
-          <Property Name="TongTien" Type="Double" Nullable="false" />
+          <Property Name="TongTien" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="UngTruoc" Type="Double" Nullable="false" />
           <NavigationProperty Name="HopDong_ChiTiet" Relationship="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_HopDong" FromRole="HopDong" ToRole="HopDong_ChiTiet" />
         </EntityType>
@@ -161,7 +171,7 @@
           <Property Name="MaHopDong" Type="Int32" Nullable="false" />
           <Property Name="MaVung" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="SoThua" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="DienTich" Type="Double" Nullable="false" />
+          <Property Name="DienTich" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="ViTriDat" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="LoaiDat" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="TinhTrangDat" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
@@ -177,6 +187,14 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Pass" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Permission" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Vung">
           <Key>
@@ -269,6 +287,15 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="TTC_HopDongThueDatModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

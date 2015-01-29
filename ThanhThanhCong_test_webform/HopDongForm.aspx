@@ -3,12 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%  string action = "Them";
+    <%  if (Session["user"] != null)
+        {
+    %>
+    <%
+    string action = "Them";
     string _action = "Thêm";
     int maHopDong = -1;
     try
     {
-        maHopDong = int.Parse(Request.QueryString["maHopDong"]);
+        if (Session["per"].ToString() == "1")
+            maHopDong = int.Parse(Request.QueryString["maHopDong"]);
     }
     catch
     {
@@ -124,7 +129,7 @@
                             </select>
                         </td>
                         <td><input id="txtSoThua<%=i %>" name="txtSoThua<%=i %>" maxlength="10" value="<%=hd_ct.SoThua %>" onkeypress="return float(event)"/></td>
-                        <td><input id="txtDienTich<%=i %>" name="txtDienTich<%=i %>" maxlength="100" value="<%=hd_ct.DienTich %>" onkeypress="return float(event)"/></td>
+                        <td><input id="txtDienTich<%=i %>" name="txtDienTich<%=i %>" maxlength="50" value="<%=hd_ct.DienTich %>" onkeypress="return float(event)"/></td>
                         <td><input id="txtViTriDat<%=i %>" name="txtViTriDat<%=i %>" maxlength="200" value="<%=hd_ct.ViTriDat %>" /></td>
                         <td><input id="txtLoaiDat<%=i %>" name="txtLoaiDat<%=i %>" maxlength="50" value="<%=hd_ct.LoaiDat %>" /></td>
                         <td><input id="txtTinhTrangDat<%=i %>" name="txtTinhTrangDat<%=i %>" maxlength="200" value="<%=hd_ct.TinhTrangDat %>" /></td>
@@ -385,4 +390,14 @@
         Chưa có danh sách vùng.<br />
     Bấm vào <a href="/Vung.aspx">đây</a> để chuyển đến trang Quản lý vùng.
     <%}%>
+
+    <%  }
+        else
+        {%>
+            <center>
+            Bạn chưa đăng nhập.<br />
+            Bấm vào <a href="/DangNhap.aspx">đây</a> để đăng nhập.
+            </center>
+        <%}
+         %>
 </asp:Content>

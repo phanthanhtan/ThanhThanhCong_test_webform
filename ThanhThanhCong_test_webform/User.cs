@@ -12,18 +12,10 @@ namespace ThanhThanhCong_test_webform
     using System;
     using System.Collections.Generic;
     
-    public partial class HopDong_ChiTiet
+    public partial class User
     {
-        public int MaHopDong_ChiTiet { get; set; }
-        public int MaHopDong { get; set; }
-        public string MaVung { get; set; }
-        public string SoThua { get; set; }
-        public string DienTich { get; set; }
-        public string ViTriDat { get; set; }
-        public string LoaiDat { get; set; }
-        public string TinhTrangDat { get; set; }
-    
-        public virtual HopDong HopDong { get; set; }
-        public virtual Vung Vung { get; set; }
+        public string ID { get; set; }
+        public string Pass { get; set; }
+        public int Permission { get; set; }
     }
 }

@@ -3,6 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <center>
+    <%  if (Session["user"] != null && Session["per"].ToString() == "1")
+        {
+    %>
     <h2>Quản lý vùng</h2>
     <a href="/VungForm.aspx">Thêm vùng</a><br /><br />
     <table cellspacing="0" cellpadding="0" border="1" style="text-align:center">
@@ -34,5 +37,11 @@
             }
             %>
     </table>
+    <% }
+       else
+       {%>
+            Chức năng này chỉ dành cho Admin.<br />
+            Bấm vào <a href="/DangNhap.aspx">đây</a> để đăng nhập.
+       <%} %>
 </center>
 </asp:Content>

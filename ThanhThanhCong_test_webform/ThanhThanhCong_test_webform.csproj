@@ -63,6 +63,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DangNhap.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="HopDong.aspx" />
     <Content Include="HopDongForm.aspx" />
@@ -71,6 +72,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DangNhap.aspx.cs">
+      <DependentUpon>DangNhap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DangNhap.aspx.designer.cs">
+      <DependentUpon>DangNhap.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -125,6 +133,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TTC_HopDongThueDat.edmx</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>TTC_HopDongThueDat.tt</DependentUpon>
+    </Compile>
     <Compile Include="Vung.aspx.cs">
       <DependentUpon>Vung.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,11 +155,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Layout.Master" />
     <EntityDeploy Include="TTC_HopDongThueDat.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TTC_HopDongThueDat.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="packages.config" />
     <Content Include="TTC_HopDongThueDat.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TTC_HopDongThueDat.edmx</DependentUpon>
@@ -162,7 +174,6 @@
       <DependentUpon>TTC_HopDongThueDat.edmx</DependentUpon>
       <LastGenOutput>TTC_HopDongThueDat.cs</LastGenOutput>
     </Content>
-    <Content Include="Layout.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

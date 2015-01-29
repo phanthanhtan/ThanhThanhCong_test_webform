@@ -28,6 +28,7 @@ namespace ThanhThanhCong_test_webform
         public DbSet<HopDong> HopDong { get; set; }
         public DbSet<HopDong_ChiTiet> HopDong_ChiTiet { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Vung> Vung { get; set; }
     }
 }

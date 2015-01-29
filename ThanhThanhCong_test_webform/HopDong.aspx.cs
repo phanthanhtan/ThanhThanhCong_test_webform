@@ -13,66 +13,72 @@ namespace ThanhThanhCong_test_webform
         private TTC_HopDongThueDatEntities entity = new TTC_HopDongThueDatEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string action = Request.QueryString["action"];
-            if (action == "Them")
+            if (Session["user"] != null)//user + admin
             {
-                string them = Them();
-                switch (them)
+                string action = Request.QueryString["action"];
+                if (action == "Them")
                 {
-                    case "ThemOk":
-                        Response.Write("<script>alert('Thêm thành công!');</script>)");
-                        break;
-                    case "ThemError":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình thêm (có thể do trùng mã vùng). Vui lòng thao tác lại!');</script>");
-                        break;
-                    case "ThemErrorDienTich":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình thêm (chưa chọn vùng/diện tích nhập không đúng theo yêu cầu). Vui lòng thao tác lại!');</script>");
-                        break;
-                    case "inOk":
-                        Response.Write("<script>alert('Lưu và in thành công!');</script>");
-                        break;
-                    default:
-                        break;
+                    string them = Them();
+                    switch (them)
+                    {
+                        case "ThemOk":
+                            Response.Write("<script>alert('Thêm thành công!');</script>)");
+                            break;
+                        case "ThemError":
+                            Response.Write("<script>alert('Có lỗi xảy ra trong quá trình thêm (có thể do trùng mã vùng). Vui lòng thao tác lại!');</script>");
+                            break;
+                        case "ThemErrorDienTich":
+                            Response.Write("<script>alert('Có lỗi xảy ra trong quá trình thêm (chưa chọn vùng/diện tích nhập không đúng theo yêu cầu). Vui lòng thao tác lại!');</script>");
+                            break;
+                        case "inOk":
+                            Response.Write("<script>alert('Lưu và in thành công!');</script>");
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            if (action == "Sua")
-            {
-                string sua = Sua();
-                switch (sua)
+                if (Session["per"].ToString() == "1")//admin
                 {
-                    case "SuaOk":
-                        Response.Write("<script>alert('Sửa thành công!');</script>)");
-                        break;
-                    case "SuaError":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình sửa. Vui lòng thao tác lại!');</script>");
-                        break;
-                    case "SuaErrorDienTich":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình sửa (chưa chọn vùng/diện tích nhập không đúng theo yêu cầu). Vui lòng thao tác lại!');</script>");
-                        break;
-                    case "inOk":
-                        Response.Write("<script>alert('Lưu và in thành công!');</script>");
-                        break;
-                    default:
-                        break;
-                }
-            }
-            if (action == "Xoa")
-            {
-                string maHopDong = Request.QueryString["maHopDong"];
-                string xoa = Xoa(maHopDong);
-                switch (xoa)
-                {
-                    case "XoaOk":
-                        Response.Write("<script>alert('Xóa thành công!');</script>");
-                        break;
-                    case "XoaError":
-                        Response.Write("<script>alert('Có lỗi xảy ra trong quá trình xóa. Vui lòng thao tác lại!');</script>");
-                        break;
-                    case "XoaNull":
-                        Response.Write("<script>alert('Mã hợp đồng không có trong cơ sở dữ liệu. Vui lòng kiểm tra lại!');</script>");
-                        break;
-                    default:
-                        break;
+                    if (action == "Sua")
+                    {
+                        string sua = Sua();
+                        switch (sua)
+                        {
+                            case "SuaOk":
+                                Response.Write("<script>alert('Sửa thành công!');</script>)");
+                                break;
+                            case "SuaError":
+                                Response.Write("<script>alert('Có lỗi xảy ra trong quá trình sửa. Vui lòng thao tác lại!');</script>");
+                                break;
+                            case "SuaErrorDienTich":
+                                Response.Write("<script>alert('Có lỗi xảy ra trong quá trình sửa (chưa chọn vùng/diện tích nhập không đúng theo yêu cầu). Vui lòng thao tác lại!');</script>");
+                                break;
+                            case "inOk":
+                                Response.Write("<script>alert('Lưu và in thành công!');</script>");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    if (action == "Xoa")
+                    {
+                        string maHopDong = Request.QueryString["maHopDong"];
+                        string xoa = Xoa(maHopDong);
+                        switch (xoa)
+                        {
+                            case "XoaOk":
+                                Response.Write("<script>alert('Xóa thành công!');</script>");
+                                break;
+                            case "XoaError":
+                                Response.Write("<script>alert('Có lỗi xảy ra trong quá trình xóa. Vui lòng thao tác lại!');</script>");
+                                break;
+                            case "XoaNull":
+                                Response.Write("<script>alert('Mã hợp đồng không có trong cơ sở dữ liệu. Vui lòng kiểm tra lại!');</script>");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
             }
         }
@@ -134,7 +140,7 @@ namespace ThanhThanhCong_test_webform
                     hd.DonGiaThue = donGiaThue;
                     hd.UngTruoc = float.Parse(Request.Form["txtUngTruoc"]);
 
-                    hd.TongTien = dienTich * donGiaThue * soVu;
+                    hd.TongTien = (dienTich * donGiaThue * soVu).ToString();
 
                     entity.HopDong.Add(hd);
                     entity.SaveChanges();
@@ -153,7 +159,7 @@ namespace ThanhThanhCong_test_webform
                                 hd_ct.MaHopDong = hd_ma.MaHopDong;
                                 hd_ct.MaVung = Request.Form["txtMaVung" + i];
                                 hd_ct.SoThua = Request.Form["txtSoThua" + i];
-                                hd_ct.DienTich = float.Parse(Request.Form["txtDienTich" + i]);
+                                hd_ct.DienTich = (float.Parse(Request.Form["txtDienTich" + i])).ToString();
                                 hd_ct.ViTriDat = Request.Form["txtViTriDat" + i];
                                 hd_ct.LoaiDat = Request.Form["txtLoaiDat" + i];
                                 hd_ct.TinhTrangDat = Request.Form["txtTinhTrangDat" + i];
@@ -241,7 +247,7 @@ namespace ThanhThanhCong_test_webform
                     hd.DonGiaThue = donGiaThue;
                     hd.UngTruoc = float.Parse(Request.Form["txtUngTruoc"]);
 
-                    hd.TongTien = dienTich * donGiaThue * soVu;
+                    hd.TongTien = (dienTich * donGiaThue * soVu).ToString();
 
                     entity.HopDong.Attach(hd);
                     entity.Entry(hd).State = EntityState.Modified;
@@ -265,7 +271,7 @@ namespace ThanhThanhCong_test_webform
                             hd_ct.MaHopDong = maHopDong;
                             hd_ct.MaVung = Request.Form["txtMaVung" + i];
                             hd_ct.SoThua = Request.Form["txtSoThua" + i];
-                            hd_ct.DienTich = float.Parse(Request.Form["txtDienTich" + i]);
+                            hd_ct.DienTich = (float.Parse(Request.Form["txtDienTich" + i])).ToString();
                             hd_ct.ViTriDat = Request.Form["txtViTriDat" + i];
                             hd_ct.LoaiDat = Request.Form["txtLoaiDat" + i];
                             hd_ct.TinhTrangDat = Request.Form["txtTinhTrangDat" + i];
@@ -500,7 +506,7 @@ namespace ThanhThanhCong_test_webform
                 Microsoft.Office.Interop.Excel.Range HAIBEN = oSheet.get_Range("A7", "I29");
                 HAIBEN.Font.Name = "Times New Roman";
                 HAIBEN.Font.Size = "12";
-                HAIBEN.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                HAIBEN.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignJustify;
                 HAIBEN.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignTop;
 
                 Microsoft.Office.Interop.Excel.Range dieu1_2 = oSheet.get_Range("B30", "B31");
@@ -755,7 +761,7 @@ namespace ThanhThanhCong_test_webform
 
                 Microsoft.Office.Interop.Excel.Range dieu8_3 = oSheet.get_Range("A" + row, "I" + (row + 1));
                 dieu8_3.MergeCells = true;
-                dieu8_3.Value2 = "Hợp đồng này lập thành 04 (bốn) bản có giá trị pháp lý như nhau, bên A giữ 01 (một) bản bà bên B giữ 03 (ba) bản.";
+                dieu8_3.Value2 = "Hợp đồng này lập thành 04 (bốn) bản có giá trị pháp lý như nhau, bên A giữ 01 (một) bản và bên B giữ 03 (ba) bản.";
                 dieu8_3.Font.Italic = true;
                 dieu8_3.WrapText = true;
                 row += 2;
@@ -763,7 +769,7 @@ namespace ThanhThanhCong_test_webform
                 Microsoft.Office.Interop.Excel.Range dieu2dieu8 = oSheet.get_Range("A" + dieu2_start, "I" + (row - 1));
                 dieu2dieu8.Font.Name = "Times New Roman";
                 dieu2dieu8.Font.Size = "12";
-                dieu2dieu8.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                dieu2dieu8.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignJustify;
                 dieu2dieu8.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignTop;
                 //---------------------------------------------------------------------------------
                 Microsoft.Office.Interop.Excel.Range UBND = oSheet.get_Range("A" + row, "I" + row);

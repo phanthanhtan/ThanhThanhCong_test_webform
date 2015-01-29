@@ -11,7 +11,10 @@ namespace ThanhThanhCong_test_webform
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] == null)
+                Session["user"] = null;
+            if (Session["per"] == null)
+                Session["per"] = null;
         }
     }
 }

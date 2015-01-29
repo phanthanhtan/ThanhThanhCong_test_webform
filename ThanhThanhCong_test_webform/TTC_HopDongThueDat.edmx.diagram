@@ -4,10 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0b3c6e1b8b9a45dea544c7764552a322" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="03da5f7dd99d4ebfae26278306de3faa" Name="Diagram1" ZoomLevel="87">
         <EntityTypeShape EntityType="TTC_HopDongThueDatModel.HopDong" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TTC_HopDongThueDatModel.HopDong_ChiTiet" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TTC_HopDongThueDatModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TTC_HopDongThueDatModel.User" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TTC_HopDongThueDatModel.Vung" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
         <AssociationConnector Association="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_HopDong" ManuallyRouted="false" />
         <AssociationConnector Association="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_Vung" ManuallyRouted="false" />
