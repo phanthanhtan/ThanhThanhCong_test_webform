@@ -96,6 +96,23 @@
         <tr>
             <td>Địa chỉ: </td><td><input id="txtDiaChi_A2" name="txtDiaChi_A2" maxlength="500" <%if (action == "Sua") {%> value="<%=hd.DiaChi_A2 %>" <%} %>/></td>
             <td>Địa chỉ: </td><td><input id="txtDiaChi_B2" name="txtDiaChi_B2" maxlength="500" <%if (action == "Sua") {%> value="<%=hd.DiaChi_B2 %>" <%} %>/></td>
+            <%  if (action == "Sua")
+                {
+                    ThanhThanhCong_test_webform.TTC_HopDongThueDatEntities entity_in = new ThanhThanhCong_test_webform.TTC_HopDongThueDatEntities();
+                    List<ThanhThanhCong_test_webform.HopDong_in> list = entity_in.HopDong_in.Where(item => item.MaHopDong == maHopDong).ToList();
+                    int count = list.Count;
+                %>
+            <td>Số lần in:</td>
+            <td>
+                <%=count %>
+            </td>
+            <td>
+                <%  if (count > 0)
+                    {%>
+                        <a href="HopDongin.aspx?maHopDong=<%=maHopDong %>">Chi tiết</a>
+                    <%} %>                
+            </td>
+            <%} %>
         </tr>
         <tr>
             <td>Điện thoại: </td><td><input id="txtSDT_A2" name="txtSDT_A2" maxlength="50" onkeypress="return CheckNumber(event)" <%if (action == "Sua") {%> value="<%=hd.SDT_A2 %>" <%} %>/></td>

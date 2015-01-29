@@ -17,6 +17,7 @@ namespace ThanhThanhCong_test_webform
         public HopDong()
         {
             this.HopDong_ChiTiet = new HashSet<HopDong_ChiTiet>();
+            this.HopDong_in = new HashSet<HopDong_in>();
         }
     
         public int MaHopDong { get; set; }
@@ -46,5 +47,6 @@ namespace ThanhThanhCong_test_webform
         public double UngTruoc { get; set; }
     
         public virtual ICollection<HopDong_ChiTiet> HopDong_ChiTiet { get; set; }
+        public virtual ICollection<HopDong_in> HopDong_in { get; set; }
     }
 }

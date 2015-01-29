@@ -8,6 +8,7 @@
         <EntityContainer Name="TTC_HopDongThueDatModelStoreContainer">
           <EntitySet Name="HopDong" EntityType="TTC_HopDongThueDatModel.Store.HopDong" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="HopDong_ChiTiet" EntityType="TTC_HopDongThueDatModel.Store.HopDong_ChiTiet" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HopDong_in" EntityType="TTC_HopDongThueDatModel.Store.HopDong_in" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="TTC_HopDongThueDatModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="TTC_HopDongThueDatModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Vung" EntityType="TTC_HopDongThueDatModel.Store.Vung" store:Type="Tables" Schema="dbo" />
@@ -18,6 +19,10 @@
           <AssociationSet Name="FK_HopDong_ChiTiet_Vung" Association="TTC_HopDongThueDatModel.Store.FK_HopDong_ChiTiet_Vung">
             <End Role="Vung" EntitySet="Vung" />
             <End Role="HopDong_ChiTiet" EntitySet="HopDong_ChiTiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HopDong_in_HopDong" Association="TTC_HopDongThueDatModel.Store.FK_HopDong_in_HopDong">
+            <End Role="HopDong" EntitySet="HopDong" />
+            <End Role="HopDong_in" EntitySet="HopDong_in" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="HopDong">
@@ -62,6 +67,15 @@
           <Property Name="ViTriDat" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="LoaiDat" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="TinhTrangDat" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="HopDong_in">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MaHopDong" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Time" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -112,6 +126,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HopDong_in_HopDong">
+          <End Role="HopDong" Type="TTC_HopDongThueDatModel.Store.HopDong" Multiplicity="1" />
+          <End Role="HopDong_in" Type="TTC_HopDongThueDatModel.Store.HopDong_in" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HopDong">
+              <PropertyRef Name="MaHopDong" />
+            </Principal>
+            <Dependent Role="HopDong_in">
+              <PropertyRef Name="MaHopDong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -120,12 +146,17 @@
         <EntityContainer Name="TTC_HopDongThueDatEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="HopDong" EntityType="TTC_HopDongThueDatModel.HopDong" />
           <EntitySet Name="HopDong_ChiTiet" EntityType="TTC_HopDongThueDatModel.HopDong_ChiTiet" />
+          <EntitySet Name="HopDong_in" EntityType="TTC_HopDongThueDatModel.HopDong_in" />
           <EntitySet Name="sysdiagrams" EntityType="TTC_HopDongThueDatModel.sysdiagrams" />
           <EntitySet Name="User" EntityType="TTC_HopDongThueDatModel.User" />
           <EntitySet Name="Vung" EntityType="TTC_HopDongThueDatModel.Vung" />
           <AssociationSet Name="FK_HopDong_ChiTiet_HopDong" Association="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_HopDong">
             <End Role="HopDong" EntitySet="HopDong" />
             <End Role="HopDong_ChiTiet" EntitySet="HopDong_ChiTiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HopDong_in_HopDong" Association="TTC_HopDongThueDatModel.FK_HopDong_in_HopDong">
+            <End Role="HopDong" EntitySet="HopDong" />
+            <End Role="HopDong_in" EntitySet="HopDong_in" />
           </AssociationSet>
           <AssociationSet Name="FK_HopDong_ChiTiet_Vung" Association="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_Vung">
             <End Role="Vung" EntitySet="Vung" />
@@ -162,6 +193,7 @@
           <Property Name="TongTien" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="UngTruoc" Type="Double" Nullable="false" />
           <NavigationProperty Name="HopDong_ChiTiet" Relationship="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_HopDong" FromRole="HopDong" ToRole="HopDong_ChiTiet" />
+          <NavigationProperty Name="HopDong_in" Relationship="TTC_HopDongThueDatModel.FK_HopDong_in_HopDong" FromRole="HopDong" ToRole="HopDong_in" />
         </EntityType>
         <EntityType Name="HopDong_ChiTiet">
           <Key>
@@ -177,6 +209,16 @@
           <Property Name="TinhTrangDat" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="HopDong" Relationship="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_HopDong" FromRole="HopDong_ChiTiet" ToRole="HopDong" />
           <NavigationProperty Name="Vung" Relationship="TTC_HopDongThueDatModel.FK_HopDong_ChiTiet_Vung" FromRole="HopDong_ChiTiet" ToRole="Vung" />
+        </EntityType>
+        <EntityType Name="HopDong_in">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaHopDong" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="HopDong" Relationship="TTC_HopDongThueDatModel.FK_HopDong_in_HopDong" FromRole="HopDong_in" ToRole="HopDong" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -212,6 +254,18 @@
               <PropertyRef Name="MaHopDong" />
             </Principal>
             <Dependent Role="HopDong_ChiTiet">
+              <PropertyRef Name="MaHopDong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HopDong_in_HopDong">
+          <End Role="HopDong" Type="TTC_HopDongThueDatModel.HopDong" Multiplicity="1" />
+          <End Role="HopDong_in" Type="TTC_HopDongThueDatModel.HopDong_in" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HopDong">
+              <PropertyRef Name="MaHopDong" />
+            </Principal>
+            <Dependent Role="HopDong_in">
               <PropertyRef Name="MaHopDong" />
             </Dependent>
           </ReferentialConstraint>
@@ -276,6 +330,16 @@
                 <ScalarProperty Name="ViTriDat" ColumnName="ViTriDat" />
                 <ScalarProperty Name="LoaiDat" ColumnName="LoaiDat" />
                 <ScalarProperty Name="TinhTrangDat" ColumnName="TinhTrangDat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HopDong_in">
+            <EntityTypeMapping TypeName="TTC_HopDongThueDatModel.HopDong_in">
+              <MappingFragment StoreEntitySet="HopDong_in">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaHopDong" ColumnName="MaHopDong" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

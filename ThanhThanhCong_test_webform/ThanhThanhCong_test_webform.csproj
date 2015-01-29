@@ -67,6 +67,7 @@
     <Content Include="Default.aspx" />
     <Content Include="HopDong.aspx" />
     <Content Include="HopDongForm.aspx" />
+    <Content Include="HopDongin.aspx" />
     <Content Include="Vung.aspx" />
     <Content Include="VungForm.aspx" />
     <Content Include="Web.config" />
@@ -103,7 +104,17 @@
     <Compile Include="HopDongForm.aspx.designer.cs">
       <DependentUpon>HopDongForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HopDongin.aspx.cs">
+      <DependentUpon>HopDongin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HopDongin.aspx.designer.cs">
+      <DependentUpon>HopDongin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HopDong_ChiTiet.cs">
+      <DependentUpon>TTC_HopDongThueDat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HopDong_in.cs">
       <DependentUpon>TTC_HopDongThueDat.tt</DependentUpon>
     </Compile>
     <Compile Include="Layout.Master.cs">

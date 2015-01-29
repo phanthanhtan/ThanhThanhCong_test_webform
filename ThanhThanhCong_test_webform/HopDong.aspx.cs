@@ -817,6 +817,20 @@ namespace ThanhThanhCong_test_webform
                 final2.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 final2.Font.Name = "Times New Roman";
                 final2.Font.Size = "12";
+
+            //quản lý in-------------------------------------------------------------------------
+                try
+                {
+                    HopDong_in hd_in = new HopDong_in();
+                    hd_in.MaHopDong = hd.MaHopDong;
+                    hd_in.UserID = Session["user"].ToString();
+                    hd_in.Time = DateTime.Now.ToString(); ;
+                    entity.HopDong_in.Add(hd_in);
+                    entity.SaveChanges();
+                }
+                catch
+                {
+                }
             }
             catch
             {
