@@ -18,7 +18,5 @@ namespace ThanhThanhCong_test_webform
         public int MaHopDong { get; set; }
         public string UserID { get; set; }
         public string Time { get; set; }
-    
-        public virtual HopDong HopDong { get; set; }
     }
 }

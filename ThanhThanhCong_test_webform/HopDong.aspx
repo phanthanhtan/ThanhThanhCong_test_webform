@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<center>
+    <center>
     <%  if (Session["user"] != null && Session["per"].ToString() == "1")
         {
     %>
@@ -15,9 +15,9 @@
             <td style="width:200px">Bên thuê đất</td>
             <td style="width:50px">Số vụ</td>
             <td style="width:50px">Từ vụ</td>
-            <td style="width:100px">Đơn giá thuê</td>
-            <td style="width:100px">Tổng tiền</td>
-            <td style="width:100px">Ứng trước</td>
+            <td>Đơn giá thuê</td>
+            <td>Tổng tiền</td>
+            <td>Ứng trước</td>
             <td>Chức năng</td>
         </tr>
         <%  ThanhThanhCong_test_webform.TTC_HopDongThueDatEntities entity = new ThanhThanhCong_test_webform.TTC_HopDongThueDatEntities();
@@ -38,9 +38,9 @@
                         <td><%=hd.HoTen_B1 %></td>
                         <td><%=hd.SoVu %></td>
                         <td><%=hd.TuVu %></td>
-                        <td style="text-align:right"><%=hd.DonGiaThue %></td>
+                        <td style="text-align:right"><%=hd.DonGiaThue.ToString("0,0") %></td>
                         <td style="text-align:right"><%=hd.TongTien %></td>
-                        <td style="text-align:right"><%=hd.UngTruoc %></td>
+                        <td style="text-align:right"><%=hd.UngTruoc.ToString("0,0") %></td>
                         <td><a href="/HopDongForm.aspx?maHopDong=<%=hd.MaHopDong %>" title="Xem chi tiết/Sửa">Chi tiết</a>
                             <a href="/HopDong.aspx?action=Xoa&maHopDong=<%=hd.MaHopDong %>" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?!?')">Xóa</a>
                         </td>

@@ -45,7 +45,7 @@ namespace ThanhThanhCong_test_webform
                         switch (sua)
                         {
                             case "SuaOk":
-                                Response.Write("<script>alert('Sửa thành công!');</script>)");
+                                Response.Write("<script>alert('Sửa thành công!');</script>");
                                 break;
                             case "SuaError":
                                 Response.Write("<script>alert('Có lỗi xảy ra trong quá trình sửa. Vui lòng thao tác lại!');</script>");
@@ -140,7 +140,7 @@ namespace ThanhThanhCong_test_webform
                     hd.DonGiaThue = donGiaThue;
                     hd.UngTruoc = float.Parse(Request.Form["txtUngTruoc"]);
 
-                    hd.TongTien = (dienTich * donGiaThue * soVu).ToString();
+                    hd.TongTien = (dienTich * donGiaThue * soVu).ToString("0,0");
 
                     entity.HopDong.Add(hd);
                     entity.SaveChanges();
@@ -247,7 +247,7 @@ namespace ThanhThanhCong_test_webform
                     hd.DonGiaThue = donGiaThue;
                     hd.UngTruoc = float.Parse(Request.Form["txtUngTruoc"]);
 
-                    hd.TongTien = (dienTich * donGiaThue * soVu).ToString();
+                    hd.TongTien = (dienTich * donGiaThue * soVu).ToString("0,0");
 
                     entity.HopDong.Attach(hd);
                     entity.Entry(hd).State = EntityState.Modified;
@@ -618,7 +618,7 @@ namespace ThanhThanhCong_test_webform
 
                 Microsoft.Office.Interop.Excel.Range dieu4_2 = oSheet.get_Range("A" + row, "I" + row);
                 dieu4_2.MergeCells = true;
-                dieu4_2.Value2 = hd.DonGiaThue + " đồng/ha/năm";
+                dieu4_2.Value2 = hd.DonGiaThue.ToString("0,0") + " đồng/ha/năm";
                 row++;
 
                 Microsoft.Office.Interop.Excel.Range dieu4_3 = oSheet.get_Range("A" + row, "I" + row);
@@ -641,7 +641,7 @@ namespace ThanhThanhCong_test_webform
 
                 Microsoft.Office.Interop.Excel.Range dieu5_3 = oSheet.get_Range("A" + row, "I" + row);
                 dieu5_3.MergeCells = true;
-                dieu5_3.Value2 = "1. Bên B sẽ ứng trước cho bên A số tiền là " + hd.UngTruoc + " đồng sau khi ký Hợp đồng này.";
+                dieu5_3.Value2 = "1. Bên B sẽ ứng trước cho bên A số tiền là " + hd.UngTruoc.ToString("0,0") + " đồng sau khi ký Hợp đồng này.";
                 row++;
 
                 Microsoft.Office.Interop.Excel.Range dieu5_4 = oSheet.get_Range("A" + row, "I" + (row + 1));
@@ -818,13 +818,17 @@ namespace ThanhThanhCong_test_webform
                 final2.Font.Name = "Times New Roman";
                 final2.Font.Size = "12";
 
+                //CenterHorizontally canh giữa trang thêo chiều ngang
+                //CenterVertically canh giữa trang thêo chiều dọc
+                head.Worksheet.PageSetup.CenterHorizontally = true;
+
             //quản lý in-------------------------------------------------------------------------
                 try
                 {
                     HopDong_in hd_in = new HopDong_in();
                     hd_in.MaHopDong = hd.MaHopDong;
                     hd_in.UserID = Session["user"].ToString();
-                    hd_in.Time = DateTime.Now.ToString(); ;
+                    hd_in.Time = DateTime.Now.ToString();
                     entity.HopDong_in.Add(hd_in);
                     entity.SaveChanges();
                 }
