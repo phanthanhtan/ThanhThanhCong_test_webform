@@ -19,6 +19,7 @@
             { %>
          -
         <a href="/HopDong.aspx"> Danh sách hợp đồng</a> -
+        <a href="/HopDongin.aspx"> Xem số lần in hợp đồng</a> -
         <a href="/Vung.aspx"> Quản lý vùng</a>
         <%  }
             } %>

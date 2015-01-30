@@ -9,6 +9,7 @@
      <%  if(Session["per"].ToString() == "1")
         { %>
     <a href="/HopDong.aspx">Danh sách hợp đồng</a><br />
+    <a href="/HopDongin.aspx"> Xem số lần in hợp đồng</a><br />
     <a href="/Vung.aspx">Quản lý vùng</a><br />
     <%  }
         } %>
